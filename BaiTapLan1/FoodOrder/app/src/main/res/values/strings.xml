@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Food Order</string>
+    <string name="business_phone">123456</string>
+    <string name="business_address">123 Euclid Ave</string>
+</resources>

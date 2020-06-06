@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Landmarks</string>
+    <string name="item1">Cleveland Tower City</string>
+    <string name="item2">Browns Football Field</string>
+    <string name="item3">Cleveland State University</string>
+    <string name="item4">Playhouse Square</string>
+    <string name="item5">Art Museum</string>
+</resources>

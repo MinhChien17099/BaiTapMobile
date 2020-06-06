@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CountryInfo">
+    <ImageView
+        android:id="@+id/imageView_countryFlag"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_launcher_background" />
+    <TextView
+        android:id="@+id/textView_countryName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Country Name"
+        android:textSize="20dp"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/imageView_countryFlag" />
+    <TextView
+        android:id="@+id/textView_Population"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Population"
+        android:textSize="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/textView_countryName"
+        android:layout_marginLeft="20dp"/>
+    <TextView
+        android:id="@+id/textView_Area"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Area"
+        android:textSize="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignLeft="@+id/textView_Population"
+        android:layout_below="@+id/textView_Population"/>
+</RelativeLayout>
