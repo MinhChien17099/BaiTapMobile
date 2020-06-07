@@ -53,11 +53,11 @@ public class DataAdapter extends BaseAdapter {
         holder.textView_countryName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(context,CountryInfo.class);
-                intent.putExtra("Country Name",country.getCountryName());
-                intent.putExtra("Country Code",country.getCountryCode());
-                intent.putExtra("Population",country.getPopulation());
-                intent.putExtra("Area",country.getAreaInSqKm());
+                Intent intent = new Intent(context, CountryInfo.class);
+                intent.putExtra("Country Name", country.getCountryName());
+                intent.putExtra("Country Code", country.getCountryCode());
+                intent.putExtra("Population", country.getPopulation());
+                intent.putExtra("Area", country.getAreaInSqKm());
 
                 context.startActivity(intent);
             }
@@ -65,7 +65,6 @@ public class DataAdapter extends BaseAdapter {
 
         return convertView;
     }
-
 
     static class ViewHolder {
         TextView textView_countryName;

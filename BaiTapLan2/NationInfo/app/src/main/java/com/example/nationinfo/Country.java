@@ -7,12 +7,11 @@ public class Country {
     String areaInSqKm;
     String population;
 
-    public Country(String countryCode,String countryName,String areaInSqKm,String population)
-    {
-        this.countryCode=countryCode;
-        this.countryName=countryName;
-        this.areaInSqKm=areaInSqKm;
-        this.population=population;
+    public Country(String countryCode, String countryName, String areaInSqKm, String population) {
+        this.countryCode = countryCode;
+        this.countryName = countryName;
+        this.areaInSqKm = areaInSqKm;
+        this.population = population;
     }
 
     public String getCountryCode() {
@@ -46,7 +45,6 @@ public class Country {
     public void setPopulation(String population) {
         this.population = population;
     }
-
 
 
 }
