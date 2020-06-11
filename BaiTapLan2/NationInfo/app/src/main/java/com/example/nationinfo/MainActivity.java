@@ -14,7 +14,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Khởi tạo ListView.
         listView_Country = (ListView) findViewById(R.id.list_view);
 
         new MyAsyncTask(MainActivity.this, listView_Country).execute();

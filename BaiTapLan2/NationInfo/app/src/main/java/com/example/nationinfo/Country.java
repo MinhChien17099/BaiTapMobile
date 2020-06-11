@@ -4,10 +4,11 @@ public class Country {
 
     String countryCode;
     String countryName;
-    String areaInSqKm;
-    String population;
+    Double areaInSqKm;
+    Long population;
 
-    public Country(String countryCode, String countryName, String areaInSqKm, String population) {
+
+    public Country(String countryCode, String countryName, Double areaInSqKm, Long population) {
         this.countryCode = countryCode;
         this.countryName = countryName;
         this.areaInSqKm = areaInSqKm;
@@ -30,21 +31,19 @@ public class Country {
         this.countryName = countryName;
     }
 
-    public String getAreaInSqKm() {
+    public Double getAreaInSqKm() {
         return areaInSqKm;
     }
 
-    public void setAreaInSqKm(String area) {
-        this.areaInSqKm = area;
+    public void setAreaInSqKm(Double areaInSqKm) {
+        this.areaInSqKm = areaInSqKm;
     }
 
-    public String getPopulation() {
+    public Long getPopulation() {
         return population;
     }
 
-    public void setPopulation(String population) {
+    public void setPopulation(Long population) {
         this.population = population;
     }
-
-
 }

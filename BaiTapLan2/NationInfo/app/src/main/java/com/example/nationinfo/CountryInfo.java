@@ -13,6 +13,9 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 public class CountryInfo extends AppCompatActivity {
 
 
@@ -34,8 +37,8 @@ public class CountryInfo extends AppCompatActivity {
 
         Intent intent = getIntent();
         textView_countryName.setText(intent.getStringExtra("Country Name"));
-        textView_Population.setText(textView_Population.getText() + " : " + intent.getStringExtra("Population"));
-        textView_Area.setText(textView_Area.getText() + " : " + intent.getStringExtra("Area") + " km²");
+        textView_Population.setText(textView_Population.getText() + " : " + NumberFormat.getNumberInstance(Locale.US).format(intent.getLongExtra("Population",0)));
+        textView_Area.setText(textView_Area.getText() + " : " + NumberFormat.getNumberInstance(Locale.US).format(intent.getDoubleExtra("Area",0.0) )+ " km²");
 
         String countryCode = intent.getStringExtra("Country Code");
         String url = "https://img.geonames.org/flags/x/" + countryCode.toLowerCase() + ".gif";

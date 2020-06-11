@@ -12,24 +12,24 @@ import java.util.List;
 
 public class DataAdapter extends BaseAdapter {
 
-    private List<Country> listData;
+    private List<Country> countries;
     private LayoutInflater layoutInflater;
     private Context context;
 
-    public DataAdapter(Context aContext, List<Country> listData) {
+    public DataAdapter(Context aContext, List<Country> countries) {
         this.context = aContext;
-        this.listData = listData;
+        this.countries = countries;
         layoutInflater = LayoutInflater.from(aContext);
     }
 
     @Override
     public int getCount() {
-        return listData.size();
+        return countries.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return listData.get(position);
+        return countries.get(position);
     }
 
     @Override
@@ -38,19 +38,14 @@ public class DataAdapter extends BaseAdapter {
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder;
-        if (convertView == null) {
-            convertView = layoutInflater.inflate(R.layout.country_item, null);
-            holder = new ViewHolder();
-            holder.textView_countryName = (TextView) convertView.findViewById(R.id.textView_countryName);
-            convertView.setTag(holder);
-        } else {
-            holder = (ViewHolder) convertView.getTag();
-        }
 
-        final Country country = this.listData.get(position);
-        holder.textView_countryName.setText(country.getCountryName());
-        holder.textView_countryName.setOnClickListener(new View.OnClickListener() {
+        convertView = layoutInflater.inflate(R.layout.country_item, null);
+        TextView textView_countryName = convertView.findViewById(R.id.textView_countryName);
+
+        final Country country = this.countries.get(position);
+        textView_countryName.setText(country.getCountryName());
+
+        textView_countryName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, CountryInfo.class);
@@ -64,10 +59,6 @@ public class DataAdapter extends BaseAdapter {
         });
 
         return convertView;
-    }
-
-    static class ViewHolder {
-        TextView textView_countryName;
     }
 
 }

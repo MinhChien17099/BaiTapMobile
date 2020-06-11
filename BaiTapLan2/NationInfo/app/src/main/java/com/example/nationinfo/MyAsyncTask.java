@@ -38,7 +38,6 @@ public class MyAsyncTask extends android.os.AsyncTask<Void, Void, Void> {
     protected Void doInBackground(Void... voids) {
 
         HttpHandler sh = new HttpHandler();
-        // Making a request to url and getting response
         String url = "http://api.geonames.org/countryInfoJSON?formatted=true&username=caoth";
         String jsonStr = sh.makeServiceCall(url);
 
@@ -46,19 +45,15 @@ public class MyAsyncTask extends android.os.AsyncTask<Void, Void, Void> {
         if (jsonStr != null) {
             try {
                 JSONObject jsonObj = new JSONObject(jsonStr);
-
-                // Getting JSON Array node
                 JSONArray countries = jsonObj.getJSONArray("geonames");
 
-                // looping through All Contacts
                 for (int i = 0; i < countries.length(); i++) {
                     JSONObject c = countries.getJSONObject(i);
                     String countryCode = c.getString("countryCode");
                     String countryName = c.getString("countryName");
-                    String areaInSqKm = c.getString("areaInSqKm");
-                    String population = c.getString("population");
+                    Double areaInSqKm = c.getDouble("areaInSqKm");
+                    Long population = c.getLong("population");
                     Country country = new Country(countryCode, countryName, areaInSqKm, population);
-                    // adding contact to contact list
                     countryList.add(country);
                 }
             } catch (final JSONException e) {
