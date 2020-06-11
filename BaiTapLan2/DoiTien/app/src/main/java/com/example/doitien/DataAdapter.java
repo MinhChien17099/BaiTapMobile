@@ -40,7 +40,7 @@ public class DataAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup viewGroup) {
         convertView = inflater.inflate(R.layout.spinner_item, null);
-        TextView tvItem=(TextView)convertView.findViewById(R.id.tvItem);
+        TextView tvItem = (TextView) convertView.findViewById(R.id.tvItem);
         tvItem.setText(currencies.get(position).getCurrencyName());
         return convertView;
     }

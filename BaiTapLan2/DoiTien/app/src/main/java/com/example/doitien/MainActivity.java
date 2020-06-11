@@ -21,8 +21,11 @@ import java.io.InputStream;
 import java.math.BigDecimal;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     Spinner spinnerSource;
@@ -53,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
         currentSourcePosition = 0;
         currentDestinationPosition = 0;
 
-        //get list data from url
         new ProcessGetData().execute();
 
         txtInput.addTextChangedListener(new TextWatcher() {
@@ -69,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                setTextChangeEvent();
+                setTextChangedEvent();
             }
         });
 
@@ -80,6 +82,16 @@ public class MainActivity extends AppCompatActivity {
             return url.openConnection().getInputStream();
         } catch (IOException e) {
             return null;
+        }
+    }
+
+    public void setTextChangedEvent() {
+        try {
+            BigDecimal result = new BigDecimal(txtInput.getText().toString());
+            result = result.multiply(exchangeRate);
+            txtOutput.setText(NumberFormat.getNumberInstance(Locale.US).format(result));
+        } catch (Exception e) {
+            txtOutput.setText("");
         }
     }
 
@@ -119,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
                             insideItem = true;
                         } else if (xpp.getName().equalsIgnoreCase("title")) {
                             if (insideItem) {
-                                String str = xpp.nextText().toString();
+                                String str = xpp.nextText();
                                 titles.add(new Currency(str.substring(str.indexOf("/") + 1, str.length()), str.substring(str.lastIndexOf("(") + 1, str.lastIndexOf(")")).toLowerCase()));
                             }
                         }
@@ -153,6 +165,7 @@ public class MainActivity extends AppCompatActivity {
                 } else if (titles.get(i).getCurrencyName().equals("United States Dollar(USD)"))
                     currentSourcePosition = i;
             }
+
             spinnerSource.setSelection(currentSourcePosition);
             spinnerDestination.setSelection(currentDestinationPosition);
 
@@ -161,8 +174,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     if (position == spinnerSource.getSelectedItemPosition()) {
                         spinnerSource.setSelection(currentDestinationPosition);
-                    }
-                    else
+                    } else
                         new ProcessCalculate().execute();
                     currentDestinationPosition = position;
                 }
@@ -178,8 +190,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     if (position == spinnerDestination.getSelectedItemPosition()) {
                         spinnerDestination.setSelection(currentSourcePosition);
-                    }
-                    else
+                    } else
                         new ProcessCalculate().execute();
 
                     currentSourcePosition = position;
@@ -239,7 +250,6 @@ public class MainActivity extends AppCompatActivity {
                     } else if (eventType == XmlPullParser.END_TAG && xpp.getName().equalsIgnoreCase("item")) {
                         insideItem = false;
                     }
-
                     eventType = xpp.next();
                 }
 
@@ -257,19 +267,9 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(Exception s) {
             super.onPostExecute(s);
 
-            setTextChangeEvent();
+            setTextChangedEvent();
 
             progressDialog.dismiss();
-        }
-    }
-
-    public void setTextChangeEvent() {
-        try {
-            BigDecimal kq = new BigDecimal(txtInput.getText().toString());
-            kq = kq.multiply(exchangeRate);
-            txtOutput.setText(kq.toString());
-        } catch (Exception e) {
-            txtOutput.setText("");
         }
     }
 

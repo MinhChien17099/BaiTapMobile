@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/spinnerSource"
         android:layout_margin="8dp"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         android:hint="Nhập tiền nguồn"/>
     <Spinner
         android:id="@+id/spinnerDestination"
