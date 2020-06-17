@@ -6,50 +6,43 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 public class MainActivity extends AppCompatActivity {
 
-    private Button btn_convert;
-    private EditText txt_F;
-    private EditText txt_C;
-    private TextView txt_H;
-    private RadioButton radioButton_Fahrenheit;
-    private RadioButton radioButton_Celsius;
+    private Button btnConvert;
+    private EditText edtInput;
+    private EditText edtOutput;
+    private TextView tvResults;
+    private RadioButton radioCtoF;
+    private RadioButton radioFtoC;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
 
-        txt_F=(EditText)findViewById(R.id.txt_F);
-        txt_C=(EditText)findViewById(R.id.txt_C);
-        txt_H=(TextView)findViewById(R.id.txt_H);
-        btn_convert=(Button)findViewById(R.id.btn_convert);
-        radioButton_Celsius=(RadioButton)findViewById(R.id.radioButton_Celsius);
-        radioButton_Fahrenheit=(RadioButton)findViewById(R.id.radioButton_Fahrenheit);
+        edtInput = findViewById(R.id.edtInput);
+        edtOutput = findViewById(R.id.edtOutput);
+        tvResults = findViewById(R.id.tvResults);
+        btnConvert = findViewById(R.id.btnConvert);
+        radioCtoF = findViewById(R.id.radioCtoF);
+        radioFtoC = findViewById(R.id.radioFtoC);
 
-        btn_convert.setOnClickListener(new View.OnClickListener() {
+        btnConvert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Double result=0.0,input;
-                try {
-                    input=Double.parseDouble(txt_F.getText().toString());
-                }
-                catch (Exception ex)
-                {
-                    Toast.makeText(MainActivity.this, "Nhap Lai", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if(radioButton_Celsius.isChecked())
-                {
-                    input=(input*9.0/5.0)+32;
-                    txt_C.setText(input.toString());
-                    txt_H.setText("C=>F: "+txt_F.getText().toString()+" => "+txt_C.getText().toString()+"\n"+txt_H.getText().toString());
-                }
-                else
-                {
-                    input=(input-32)*5.0/9.0;
-                    txt_C.setText(input.toString());
-                    txt_H.setText("F=>C : "+txt_F.getText().toString()+" => "+txt_C.getText().toString()+"\n"+txt_H.getText().toString());
+                Double input=Double.parseDouble(edtInput.getText().toString());
+                if (radioCtoF.isChecked()) {
+                    input = (input * 9.0 / 5.0) + 32;
+                    edtOutput.setText(NumberFormat.getNumberInstance(Locale.US).format(input));
+                    tvResults.setText("C to F: " + edtInput.getText().toString() + " ➔ " + edtOutput.getText().toString() + "\n" + tvResults.getText().toString());
+                } else {
+                    input = (input - 32) * 5.0 / 9.0;
+                    edtOutput.setText(NumberFormat.getNumberInstance(Locale.US).format(input));
+                    tvResults.setText("F to C : " + edtInput.getText().toString() + " ➔ " + edtOutput.getText().toString() + "\n" + tvResults.getText().toString());
                 }
             }
         });

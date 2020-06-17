@@ -23,7 +23,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    public List<CheckBox> checkBoxList;
+    public List<CheckBox> Fillings;
+    public List<CheckBox> Beverage;
     private RadioGroup radioGroup_Size;
     private RadioGroup radioGroup_Tortilla;
 
@@ -32,7 +33,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        checkBoxList = new ArrayList<CheckBox>();
+        Fillings = new ArrayList<CheckBox>();
+        Beverage = new ArrayList<CheckBox>();
+
 
         Button button = (Button) findViewById(R.id.button_order);
         button.setOnClickListener(new View.OnClickListener() {
@@ -47,37 +50,54 @@ public class MainActivity extends AppCompatActivity {
         radioGroup_Size = (RadioGroup) findViewById(R.id.radioGroup_Size);
         radioGroup_Tortilla = (RadioGroup) findViewById(R.id.radioGroup_Tortilla);
 
-        String Test = "I want a # taco with $, adding ";
+        String message = "I want a # taco with $, ";
+        String fillings = "\nfillings : ";
+        String beverage = "\nbeverage : ";
 
         RadioButton radioButton_Size = (RadioButton) findViewById(radioGroup_Size.getCheckedRadioButtonId());
         RadioButton radioButton_Tortilla = (RadioButton) findViewById(radioGroup_Tortilla.getCheckedRadioButtonId());
 
-        for (CheckBox item : checkBoxList) {
+        //Lấy danh sách fillings
+        for (CheckBox item : Fillings) {
             if (item.isChecked())
-                Test += ", " + item.getText();
+                fillings += item.getText()+", " ;
         }
-        Test = Test.replace("#", radioButton_Size.getText().toString());
-        Test = Test.replace("$", radioButton_Tortilla.getText().toString());
-        Test = Test.replace("Large", "Big");
 
-        //gui tin nhan
+        //Lấy danh sách beverage
+        for (CheckBox item : Beverage) {
+            if (item.isChecked())
+                beverage += item.getText()+ ", ";
+        }
+
+
+        message = message.replace("#", radioButton_Size.getText().toString());
+        message = message.replace("$", radioButton_Tortilla.getText().toString());
+        message += fillings+ beverage;
+        message = message.replace("Large", "Big");
+
+        //Gửi tin nhắn
         String phoneNumber = ((TextView) findViewById(R.id.business_phone)).getText().toString();
         Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("sms:" + phoneNumber));
-        intent.putExtra("sms_body", Test);
+        intent.putExtra("sms_body", message);
         startActivity(intent);
-
 
     }
 
     public void onCheckBoxClicked(View view) {
         if (((CheckBox) view).isChecked()) {
-            Toast.makeText(MainActivity.this, ((CheckBox) view).getText(), Toast.LENGTH_SHORT).show();
-            checkBoxList.add((CheckBox) view);
+            Fillings.add((CheckBox) view);
 
         } else {
-            checkBoxList.remove(((CheckBox) view));
+            Fillings.remove(((CheckBox) view));
         }
     }
 
+    public void onClicked(View view) {
+        if (((CheckBox) view).isChecked()) {
+            Beverage.add((CheckBox) view);
+        } else {
+            Beverage.remove(((CheckBox) view));
+        }
+    }
 }
 

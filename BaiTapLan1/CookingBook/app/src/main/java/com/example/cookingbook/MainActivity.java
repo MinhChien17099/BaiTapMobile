@@ -17,14 +17,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        List<Food> listData=getListData();
+        List<Food> listData=getData();
         final ListView listView=(ListView)findViewById(R.id.listView_ListFood);
-        listView.setAdapter(new ListViewAdapter(this,listData,this));
+        listView.setAdapter(new ListViewAdapter(getApplicationContext(),listData,this));
 
 
     }
 
-    public List<Food> getListData()
+    public List<Food> getData()
     {
         List<Food> listData=new ArrayList<Food>();
         Food food1 = new Food("ROSEMARY CHICKEN NOODLE SOUP", "rosemary_chicken_noodle_soup", "https://www.gimmesomeoven.com/rosemary-chicken-noodle-soup-recipe/");

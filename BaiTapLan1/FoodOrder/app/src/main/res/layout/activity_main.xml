@@ -206,7 +206,7 @@
             android:layout_height="30dp"
             android:background="@drawable/border"
             android:gravity="center"
-            android:text="Fillings" />
+            android:text="Beverage" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -218,13 +218,13 @@
                 android:layout_height="wrap_content"
                 android:text="Soda"
                 android:textSize="15dp"
-                android:onClick="onCheckBoxClicked"/>
+                android:onClick="onClicked"/>
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Cerveza"
                 android:textSize="15dp"
-                android:onClick="onCheckBoxClicked"/>
+                android:onClick="onClicked"/>
 
         </LinearLayout>
         <LinearLayout
@@ -239,13 +239,13 @@
                 android:layout_height="wrap_content"
                 android:text="Margarita"
                 android:textSize="15dp"
-                android:onClick="onCheckBoxClicked"/>
+                android:onClick="onClicked"/>
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tequila"
                 android:textSize="15dp"
-                android:onClick="onCheckBoxClicked"/>
+                android:onClick="onClicked"/>
         </LinearLayout>
     </RelativeLayout>
     <Button

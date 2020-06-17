@@ -1,4 +1,5 @@
-package  com.example.cookingbook;
+package com.example.cookingbook;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -16,17 +17,18 @@ import android.widget.Toast;
 
 import java.util.List;
 
-public class ListViewAdapter  extends BaseAdapter {
+public class ListViewAdapter extends BaseAdapter {
 
     private List<Food> listData;
     private LayoutInflater layoutInflater;
     private Context context;
-    private  Activity activity;
-    public ListViewAdapter(Context aContext,  List<Food> listData,Activity activity) {
+    private Activity activity;
+
+    public ListViewAdapter(Context aContext, List<Food> listData, Activity activity) {
         this.context = aContext;
         this.listData = listData;
         layoutInflater = LayoutInflater.from(aContext);
-        this.activity=activity;
+        this.activity = activity;
     }
 
     @Override
@@ -49,12 +51,12 @@ public class ListViewAdapter  extends BaseAdapter {
         if (convertView == null) {
             convertView = layoutInflater.inflate(R.layout.item_food, null);
             holder = new ViewHolder();
-            holder.smallIconView = (ImageView) convertView.findViewById(R.id.imageView_smallIcon);
-            holder.foodNameView = (TextView) convertView.findViewById(R.id.textView_foodName);
-            holder.showHighResView = (ImageView) convertView.findViewById(R.id.imageView_showHighRes);
-            holder.highResView = (TextView) convertView.findViewById(R.id.textView_highRes);
-            holder.leftLayout=(ConstraintLayout) convertView.findViewById(R.id.leftLayout);
-            holder.rightLayout=(ConstraintLayout) convertView.findViewById(R.id.rightLayout);
+            holder.smallIconView = convertView.findViewById(R.id.imageView_smallIcon);
+            holder.foodNameView = convertView.findViewById(R.id.textView_foodName);
+            holder.showHighResView = convertView.findViewById(R.id.imageView_showHighRes);
+            holder.highResView = convertView.findViewById(R.id.textView_highRes);
+            holder.leftLayout = convertView.findViewById(R.id.leftLayout);
+            holder.rightLayout = convertView.findViewById(R.id.rightLayout);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -69,7 +71,7 @@ public class ListViewAdapter  extends BaseAdapter {
         holder.rightLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(activity,ImageActivity.class);
+                Intent i = new Intent(activity, ImageActivity.class);
                 i.putExtra("Image ID", imageId);
                 activity.startActivity(i);
             }
@@ -78,7 +80,7 @@ public class ListViewAdapter  extends BaseAdapter {
         holder.leftLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(activity,IngredientsActivity.class);
+                Intent i = new Intent(activity, IngredientsActivity.class);
                 i.putExtra("URL", food.getUrl());
                 activity.startActivity(i);
             }
@@ -88,13 +90,12 @@ public class ListViewAdapter  extends BaseAdapter {
     }
 
 
-
-    // Find Image ID corresponding to the name of the image (in the directory mipmap).
-    public int getMipmapResIdByName(String resName)  {
+    // tìm id ảnh trong resource (mipmap)
+    public int getMipmapResIdByName(String resName) {
         String pkgName = context.getPackageName();
-        // Return 0 if not found.
-        int resID = context.getResources().getIdentifier(resName , "mipmap", pkgName);
-        Log.i("CustomListView", "Res Name: "+ resName+"==> Res ID = "+ resID);
+
+        //trả về 0 nếu không tìm thấy
+        int resID = context.getResources().getIdentifier(resName, "mipmap", pkgName);
         return resID;
     }
 

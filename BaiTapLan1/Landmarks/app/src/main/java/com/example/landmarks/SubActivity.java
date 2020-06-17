@@ -12,51 +12,56 @@ import android.widget.Toast;
 
 public class SubActivity extends AppCompatActivity {
 
+    String locationName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sub);
 
-        String data="";
-        TextView textView=(TextView)findViewById(R.id.header) ;
+        TextView textView = (TextView) findViewById(R.id.header);
         Intent intent = getIntent();
-        data=intent.getStringExtra("Location Name");
-        textView.setText(data);
+        locationName = intent.getStringExtra("Location Name");
 
-        Button buttonMapIt=(Button)findViewById(R.id.buttonMapIt);
+        textView.setText(locationName);
+
+        Button buttonMapIt = (Button) findViewById(R.id.buttonMapIt);
         buttonMapIt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent intent = getIntent();
-                String address=intent.getStringExtra("Location Name");
-                address=address.replace(' ','+');
                 try {
-                    Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q="+address));
+                    Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=" + locationName));
                     startActivity(i);
-                }
-                catch (Exception ex)
-                {
-                    Toast.makeText(SubActivity.this, "Chua cai dat ban do", Toast.LENGTH_SHORT).show();
+                } catch (Exception ex) {
+                    Toast.makeText(SubActivity.this, "Không thể mở bản đồ", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
-        Button buttonMoreInfo=(Button)findViewById(R.id.buttonMoreInfo);
+        Button buttonMoreInfo = (Button) findViewById(R.id.buttonMoreInfo);
         buttonMoreInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = getIntent();
-                String name=intent.getStringExtra("Location Name");
-                String URL="";
-                switch (name)
-                {
-                    case "Cleveland Tower City":URL="https://en.wikipedia.org/wiki/Tower_City_Center";break;
-                    case "Browns Football Field":URL="https://www.clevelandbrowns.com/";break;
-                    case "Cleveland State University":URL="https://www.csuohio.edu/";break;
-                    case "Playhouse Square":URL="http://www.playhousesquare.org/";break;
-                    case "Art Museum":URL="https://www.clevelandart.org/";break;
-                    default: break;
+                String URL = "";
+                switch (locationName) {
+                    case "Cleveland Tower City":
+                        URL = "https://en.wikipedia.org/wiki/Tower_City_Center";
+                        break;
+                    case "Browns Football Field":
+                        URL = "https://www.clevelandbrowns.com/";
+                        break;
+                    case "Cleveland State University":
+                        URL = "https://www.csuohio.edu/";
+                        break;
+                    case "Playhouse Square":
+                        URL = "http://www.playhousesquare.org/";
+                        break;
+                    case "Art Museum":
+                        URL = "https://www.clevelandart.org/";
+                        break;
+                    default:
+                        break;
                 }
                 Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(URL));
                 startActivity(i);
