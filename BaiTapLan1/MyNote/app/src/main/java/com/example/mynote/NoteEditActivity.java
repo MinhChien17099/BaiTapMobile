@@ -1,28 +1,18 @@
 package com.example.mynote;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Locale;
 
 public class NoteEditActivity extends AppCompatActivity {
 
@@ -62,6 +52,7 @@ public class NoteEditActivity extends AppCompatActivity {
         }
 
     }
+
     @Override
     protected void onPause() {
         super.onPause();
@@ -72,53 +63,46 @@ public class NoteEditActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getMenuInflater().inflate(R.menu.mymenu, menu);
+        if (position < 0)
+            getMenuInflater().inflate(R.menu.menu_new, menu);
+        else
+            getMenuInflater().inflate(R.menu.menu_edit, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home: {
-                Intent intent = new Intent(NoteEditActivity.this, NoteActivity.class);
-                startActivity(intent);
-                break;
-            }
-            case R.id.menuSave: {
-                save();
-                break;
-            }
-            case R.id.menuDelete: {
-                //Tạo  thông báo
-                final AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-                alertDialog.setTitle("Xóa ghi chú");
-                alertDialog.setMessage("Xóa ghi chú này?");
+        if (item.getItemId() == R.id.menuDelete) {
+            //Tạo  thông báo
+            final AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+            alertDialog.setTitle("Xóa ghi chú");
+            alertDialog.setMessage("Xóa ghi chú này?");
 
-                //sự kiện cho nút YES
-                alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        xml.deleteNote(position);
-                        xml.write(false);
-                        dialog.dismiss();
-                        isDeleted = true;
-                        Intent intent = new Intent(NoteEditActivity.this, NoteActivity.class);
-                        startActivity(intent);
-                    }
-                });
+            //sự kiện cho nút YES
+            alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    xml.deleteNote(position);
+                    xml.write(false);
+                    dialog.dismiss();
+                    isDeleted = true;
+                    Intent intent = new Intent(NoteEditActivity.this, NoteActivity.class);
+                    startActivity(intent);
+                    Toast.makeText(NoteActivity.getContext(), "Xóa thành công", Toast.LENGTH_SHORT).show();
+                }
+            });
 
-                //sự kiện cho nút NO
-                alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-                alertDialog.show();
-            }
-            default:
-                break;
+            //sự kiện cho nút NO
+            alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            alertDialog.show();
+        } else {
+            Intent intent = new Intent(NoteEditActivity.this, NoteActivity.class);
+            startActivity(intent);
         }
-
         return super.onOptionsItemSelected(item);
     }
 

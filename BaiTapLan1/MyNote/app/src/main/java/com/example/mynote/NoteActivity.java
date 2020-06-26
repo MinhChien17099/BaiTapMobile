@@ -1,22 +1,19 @@
 package com.example.mynote;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class NoteActivity extends AppCompatActivity {
 
+    private static Context context;
     FloatingActionButton fab;
     ListView listView;
 
@@ -27,7 +24,8 @@ public class NoteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        listView=findViewById(R.id.listView);
+        context = getApplicationContext();
+        listView = findViewById(R.id.listView);
         fab = findViewById(R.id.fab);
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -37,18 +35,21 @@ public class NoteActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        xml= new ReadWriteXML("appdata.xml", NoteActivity.this);
-        listView.setAdapter(new NoteAdapter(xml,NoteActivity.this));
+        xml = new ReadWriteXML("appdata.xml", NoteActivity.this);
+        listView.setAdapter(new NoteAdapter(xml, NoteActivity.this));
 
 
     }
+
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
-        Log.e("Main","Resume");
+        Log.e("Main", "Resume");
         xml.read();
         this.listView.invalidateViews();
     }
 
-
+    public static Context getContext() {
+        return context;
+    }
 }

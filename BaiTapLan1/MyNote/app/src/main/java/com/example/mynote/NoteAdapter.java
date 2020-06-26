@@ -6,8 +6,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +13,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class NoteAdapter extends BaseAdapter {
@@ -110,6 +109,7 @@ public class NoteAdapter extends BaseAdapter {
                         Activity activity = (Activity) context;
                         ListView lv = activity.findViewById(R.id.listView);
                         lv.invalidateViews();
+                        Toast.makeText(context,"Xóa thành công",Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
                     }
                 });
