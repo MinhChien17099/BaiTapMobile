@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+        android:id="@+id/itemTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:clickable="true"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/itemContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/itemTitle"
+        android:clickable="true"
+        android:inputType="textMultiLine"
+        android:maxLines="4"
+        android:text="...."
+        android:layout_toLeftOf="@id/delete"/>
+
+    <TextView
+        android:id="@+id/itemLastUpdate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/itemContent"
+        android:clickable="true" />
+    <ImageButton
+        android:id="@+id/delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        app:fabSize="mini"
+        android:background="@android:color/transparent"
+        android:src="@android:drawable/ic_menu_delete" />
+</RelativeLayout>
