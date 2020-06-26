@@ -46,7 +46,9 @@ public class ReadWriteXML {
                 data += "\n<note>" +
                         "\n<title>" + item.getTitle() + "</title>" +
                         "\n<lastUpdate>" + item.getLastUpdate() + "</lastUpdate>" +
-                        "\n<content>" + item.getContent() + "</content>" +
+                        "\n<content>"+
+                        "<![CDATA[" + item.getContent() + "]]>"+
+                        "</content>" +
                         "\n</note>";
             }
 
