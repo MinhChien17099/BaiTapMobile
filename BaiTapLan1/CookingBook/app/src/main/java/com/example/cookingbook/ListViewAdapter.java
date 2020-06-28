@@ -6,6 +6,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,13 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 
 import java.util.List;
 
@@ -66,7 +75,12 @@ public class ListViewAdapter extends BaseAdapter {
         holder.foodNameView.setText(food.getName());
 
         final int imageId = this.getMipmapResIdByName(food.getImage());
-        holder.smallIconView.setImageResource(imageId);
+
+        //Khởi tạo imageLoader với cấu hình mặc định
+        ImageLoader imageLoader = ImageLoader.getInstance();
+        imageLoader.init(ImageLoaderConfiguration.createDefault(context));
+        //Hiển thị ảnh lên giao diện
+        imageLoader.displayImage("drawable://" + imageId, holder.smallIconView);
 
         holder.rightLayout.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -21,6 +22,17 @@ public class MainActivity extends AppCompatActivity {
         final ListView listView=(ListView)findViewById(R.id.listView_ListFood);
         listView.setAdapter(new ListViewAdapter(getApplicationContext(),listData,this));
 
+        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                listView.invalidate();
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                listView.invalidate();
+            }
+        });
 
     }
 
