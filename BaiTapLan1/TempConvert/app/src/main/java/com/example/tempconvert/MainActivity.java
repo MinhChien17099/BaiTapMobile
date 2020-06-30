@@ -3,6 +3,7 @@ package com.example.tempconvert;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.*;
 
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         btnConvert = findViewById(R.id.btnConvert);
         radioCtoF = findViewById(R.id.radioCtoF);
         radioFtoC = findViewById(R.id.radioFtoC);
-
+        tvResults.setMovementMethod(new ScrollingMovementMethod());
         btnConvert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

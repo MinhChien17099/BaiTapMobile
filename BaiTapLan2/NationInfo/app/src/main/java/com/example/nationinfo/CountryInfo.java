@@ -37,7 +37,7 @@ public class CountryInfo extends AppCompatActivity {
 
         Intent intent = getIntent();
         textView_countryName.setText(intent.getStringExtra("Country Name"));
-        textView_Population.setText(textView_Population.getText() + " : " + NumberFormat.getNumberInstance(Locale.US).format(intent.getLongExtra("Population",0)));
+        textView_Population.setText(textView_Population.getText() + " : " + NumberFormat.getNumberInstance(Locale.US).format(intent.getLongExtra("Population",0))+" người");
         textView_Area.setText(textView_Area.getText() + " : " + NumberFormat.getNumberInstance(Locale.US).format(intent.getDoubleExtra("Area",0.0) )+ " km²");
 
         String countryCode = intent.getStringExtra("Country Code");

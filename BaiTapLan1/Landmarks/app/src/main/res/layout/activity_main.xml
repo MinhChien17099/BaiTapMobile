@@ -45,10 +45,18 @@
         android:onClick="onClick"
         android:clickable="true"/>
     <TextView
-        android:id="@+id/item5"
+    android:id="@+id/item5"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="@string/item5"
+    android:textSize="25sp"
+    android:onClick="onClick"
+    android:clickable="true"/>
+    <TextView
+        android:id="@+id/item6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/item5"
+        android:text="@string/item6"
         android:textSize="25sp"
         android:onClick="onClick"
         android:clickable="true"/>

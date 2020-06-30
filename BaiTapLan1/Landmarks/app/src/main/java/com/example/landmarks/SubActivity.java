@@ -60,6 +60,9 @@ public class SubActivity extends AppCompatActivity {
                     case "Art Museum":
                         URL = "https://www.clevelandart.org/";
                         break;
+                    case "Đại học Sài Gòn":
+                        URL = "https://sgu.edu.vn/";
+                        break;
                     default:
                         break;
                 }
