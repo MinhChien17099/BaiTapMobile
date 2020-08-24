@@ -2,12 +2,8 @@ package com.example.nationinfo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.drawable.AnimationDrawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
